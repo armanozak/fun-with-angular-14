@@ -1,0 +1,9 @@
+{
+  "_": {
+    "APP_NAME": "{{ name }} Uygulaması",
+    "DISCOUNT_20": "Tüm ürünlerde 20% indirim",
+    "TITLE": {
+      "HOME": "Anasayfa {{ titleCampaign }}"
+    }
+  }
+}

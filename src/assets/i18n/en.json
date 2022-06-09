@@ -1,0 +1,9 @@
+{
+  "_": {
+    "APP_NAME": "{{ name }} App",
+    "DISCOUNT_20": "20% discount on all items",
+    "TITLE": {
+      "HOME": "Homepage | {{ titleCampaign }}"
+    }
+  }
+}
