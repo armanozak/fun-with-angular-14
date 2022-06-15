@@ -12,11 +12,13 @@ import { from, Observable, of, zip } from 'rxjs';
 import { map, switchMap, tap, toArray } from 'rxjs/operators';
 
 import { injectAppConfig } from '../app.config';
+import { injectActiveLanguage$ } from '../l10n/active-language';
 
 class DefaultTitleStrategy extends TitleStrategy {
-  private readonly name = injectAppConfig().name;
-  private readonly title = inject(Title);
-  private readonly transloco = inject(TranslocoService);
+  protected readonly name = injectAppConfig().name;
+  protected readonly title = inject(Title);
+  protected readonly transloco = inject(TranslocoService);
+  protected readonly lang$ = injectActiveLanguage$();
 
   override updateTitle(routerState: RouterStateSnapshot) {
     const title = this.buildTitle(routerState);
@@ -24,8 +26,9 @@ class DefaultTitleStrategy extends TitleStrategy {
 
     if (!title) return;
 
-    this.selectTranslateData(data)
+    this.lang$
       .pipe(
+        switchMap(() => this.selectTranslateData(data)),
         switchMap((params) =>
           this.transloco.selectTranslateObject(title, params)
         )
